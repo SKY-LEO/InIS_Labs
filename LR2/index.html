@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our T-shirts</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
 </head>
 <body>
 
+<div class="container">
+    <h1>Our T-shirts</h1>
+    <div id="shirtDisplay" class="shirt-container"></div>
+</div>
+
+<div id="mypopup" class="popup">
+    <div class="popup-content">
+        <span class="close">×</span>
+        <img id="popupImage" src="" alt="T-shirt" style="max-width: 100%; height: auto;">
+        <h3 id="popupTitle"></h3>
+        <p id="popupDescription"></p>
+        <p id="popupPrice"></p>
+    </div>
+</div>
+
+<script src="shirts.js"></script>
+<script src="scripts/script.js"></script>
 </body>
 </html>
