@@ -4,57 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Details</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 900px;
-            display: flex;
-            align-items: flex-start;
-        }
-        .price {
-            font-weight: bold;
-            font-size: 24px;
-        }
-        .image-container {
-            flex: 1;
-            margin-right: 20px;
-        }
-        .details-container {
-            flex: 2;
-        }
-        .color-button, .side-button {
-            margin: 5px;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            border: 2px solid #000000;
-        }
-        .drop-arrow {
-            border: solid #000000;
-            border-width: 0 4px 4px 0;
-            display: inline-block;
-            padding: 10px;
-            transform: rotate(135deg);
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="styles/details_style.css">
 </head>
 <body>
 <div class="container">
     <a href="index.html" class="drop-arrow"></a>
-    <img id="shirtImage" src="" alt="T-shirt" style="max-width: 100%; height: auto; margin-right: 15px; margin-left: 7px">
+    <img id="shirtImage" src="" alt="T-shirt">
     <div>
         <h1 id="shirtTitle"></h1>
         <p class="price" id="shirtPrice"></p>
