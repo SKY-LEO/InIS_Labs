@@ -41,6 +41,10 @@ img {
     border-radius: 5px;
     border: 2px solid #000000;
 }
+.side-button {
+    background-color: #3a547f;
+    color: #f0f0f0;
+}
 .drop-arrow {
     border: solid #000000;
     border-width: 0 4px 4px 0;

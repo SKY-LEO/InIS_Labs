@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 current_color = color;
                 if (current_side === 'front') {
                     front_side_button.onclick();
-                }else {
+                } else {
                     back_side_button.onclick();
                 }
             };
@@ -29,8 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const sideButtonsContainer = document.getElementById('sideButtons');
         const front_side_button = document.createElement('button');
         front_side_button.className = 'side-button';
-        front_side_button.style.backgroundColor = '#3a547f';
-        front_side_button.style.color = 'white';
         front_side_button.textContent = 'Front';
         front_side_button.onclick = function() {
             current_side = 'front';
@@ -40,8 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const back_side_button = document.createElement('button');
         back_side_button.className = 'side-button';
-        back_side_button.style.backgroundColor = '#3a547f';
-        back_side_button.style.color = 'white';
         back_side_button.textContent = 'Back';
         back_side_button.onclick = function() {
             current_side = 'back';
