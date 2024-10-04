@@ -17,8 +17,11 @@ document.addEventListener('DOMContentLoaded', function() {
             button.textContent = color;
             button.onclick = function() {
                 current_color = color;
-                document.getElementById('shirtImage').src = shirt.colors[color].front;
-
+                if (current_side === 'front') {
+                    front_side_button.onclick();
+                }else {
+                    back_side_button.onclick();
+                }
             };
             colorButtonsContainer.appendChild(button);
         });
