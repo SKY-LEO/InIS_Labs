@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let offsetX = 0;
     let offsetY = 0;
     let isSticky = false;
+    let isResizing = false;
     let isTouchDragging = false;
+    const minSize = 50;
     let initialTouch = null;
     const initialPositions = new Map();
     let arr = ['blue', 'green', 'yellow', 'black', 'orange'];
@@ -18,9 +20,19 @@ document.addEventListener('DOMContentLoaded', () => {
             top: target.style.top,
             left: target.style.left
         });
+        const resizer = document.createElement('div');
+        resizer.classList.add('resizer');
+        target.appendChild(resizer);
     });
 
     function onMouseDown(event) {
+        if (event.target.classList.contains('resizer')) {
+            selectedElement = event.target.parentElement;
+            isResizing = true;
+            document.addEventListener('mousemove', onMouseResize);
+            document.addEventListener('mouseup', onMouseUp);
+            return;
+        }
         if (isSticky || isTouchDragging) return;
         selectedElement = event.target;
         offsetX = event.clientX - selectedElement.getBoundingClientRect().left;
@@ -30,15 +42,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function onMouseMove(event) {
-        if (selectedElement) {
+        if (selectedElement && !isResizing) {
             selectedElement.style.top = `${event.clientY - offsetY}px`;
             selectedElement.style.left = `${event.clientX - offsetX}px`;
         }
     }
 
+    function onMouseResize(event) {
+        if (selectedElement && isResizing) {
+            const rect = selectedElement.getBoundingClientRect();
+            const newWidth = event.clientX - rect.left;
+            const newHeight = event.clientY - rect.top;
+
+            if (newWidth > minSize) {
+                selectedElement.style.width = `${newWidth}px`;
+            }
+            if (newHeight > minSize) {
+                selectedElement.style.height = `${newHeight}px`;
+            }
+        }
+    }
+
     function onMouseUp() {
-        selectedElement = null;
-        document.removeEventListener('mousemove', onMouseMove);
+        if (isResizing) {
+            document.removeEventListener('mousemove', onMouseResize);
+            isResizing = false;
+        } else {
+            selectedElement = null;
+            document.removeEventListener('mousemove', onMouseMove);
+        }
         document.removeEventListener('mouseup', onMouseUp);
     }
 
@@ -74,6 +106,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function onTouchStart(event) {
+        if (event.target.classList.contains('resizer')) {
+            selectedElement = event.target.parentElement;
+            isResizing = true;
+            document.addEventListener('touchmove', onTouchResize);
+            document.addEventListener('touchend', onTouchEnd);
+            return;
+        }
         if (isSticky) return;
         if (event.touches.length > 1) {
             cancelDragging();
@@ -89,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function onTouchMove(event) {
-        if (selectedElement) {
+        if (selectedElement && !isResizing) {
             const touch = event.touches[0];
             selectedElement.style.top = `${touch.clientY - offsetY}px`;
             selectedElement.style.left = `${touch.clientX - offsetX}px`;
@@ -97,8 +136,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function onTouchResize(event) {
+        if (selectedElement && isResizing) {
+            const touch = event.touches[0];
+            const rect = selectedElement.getBoundingClientRect();
+            const newWidth = touch.clientX - rect.left;
+            const newHeight = touch.clientY - rect.top;
+
+            if (newWidth > minSize) {
+                selectedElement.style.width = `${newWidth}px`;
+            }
+            if (newHeight > minSize) {
+                selectedElement.style.height = `${newHeight}px`;
+            }
+        }
+    }
+
     function onTouchEnd() {
-        document.removeEventListener('touchmove', onTouchMove);
+        if (isResizing) {
+            document.removeEventListener('touchmove', onTouchResize);
+            isResizing = false;
+        } else {
+            document.removeEventListener('touchmove', onTouchMove);
+        }
         document.removeEventListener('touchend', onTouchEnd);
         isTouchDragging = false;
     }
@@ -137,7 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
         target.addEventListener('mousedown', onMouseDown);
         target.addEventListener('dblclick', onDoubleClick);
         target.addEventListener('touchstart', onTouchStart);
-        target.addEventListener('touchend', onTouchEnd);
         target.addEventListener('touchstart', (e) => {
             if (e.detail === 2) {
                 onTouchDoubleTap(e);

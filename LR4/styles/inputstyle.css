@@ -25,3 +25,22 @@ body {
   background-color: red;
   box-sizing: border-box;
 }
+
+.target {
+  position: absolute;
+  border: 1px solid black;
+  background-color: red;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.resizer {
+  width: 10px;
+  height: 10px;
+  background-color: gray;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  cursor: se-resize;
+}
+
