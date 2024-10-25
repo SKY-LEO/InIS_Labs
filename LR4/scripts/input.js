@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const minSize = 50;
     let initialTouch = null;
     const initialPositions = new Map();
-    let arr = ['blue', 'green', 'yellow', 'black', 'orange'];
+    let arr = ['blue', 'green', 'yellow', 'black', 'orange', 'red'];
 
     function getRandomColor() {
         return arr[Math.floor(Math.random() * (arr.length))];
@@ -76,7 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function onDoubleClick(event) {
         if (isSticky) {
-            selectedElement.style.backgroundColor = 'red';
             isSticky = false;
             selectedElement = null;
         } else {
@@ -165,7 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function onTouchDoubleTap(event) {
         if (isSticky) {
-            selectedElement.style.backgroundColor = 'red';
             isSticky = false;
             selectedElement = null;
         } else {

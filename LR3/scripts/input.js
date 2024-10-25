@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function onDoubleClick(event) {
         if (isSticky) {
-            selectedElement.style.backgroundColor = 'red';
             isSticky = false;
             selectedElement = null;
         } else {
